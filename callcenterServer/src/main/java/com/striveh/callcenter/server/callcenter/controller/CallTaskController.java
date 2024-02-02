@@ -14,11 +14,19 @@ import com.striveh.callcenter.feignclient.freeswitch.IGatewayServiceApi;
 import com.striveh.callcenter.feignclient.freeswitch.IUserInfoServiceApi;
 import com.striveh.callcenter.pojo.callcenter.CallLogPojo;
 import com.striveh.callcenter.pojo.callcenter.CallProjectPojo;
+import com.striveh.callcenter.pojo.callcenter.CallTaskPojo;
 import com.striveh.callcenter.pojo.freeswitch.GatewayPojo;
 import com.striveh.callcenter.pojo.freeswitch.UserinfoPojo;
+import com.striveh.callcenter.server.base.BaseController;
 import com.striveh.callcenter.server.callcenter.service.iservice.ICallLogService;
 import com.striveh.callcenter.server.callcenter.service.iservice.ICallProjectService;
+import com.striveh.callcenter.server.callcenter.service.iservice.ICallTaskService;
 import com.striveh.callcenter.server.callcenter.service.iservice.IFreeswitchService;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.*;
 import link.thingscloud.freeswitch.esl.InboundClient;
 import link.thingscloud.freeswitch.esl.helper.EslHelper;
 import link.thingscloud.freeswitch.esl.transport.message.EslMessage;
@@ -30,15 +38,6 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
-import com.striveh.callcenter.pojo.callcenter.CallTaskPojo;
-import com.striveh.callcenter.server.base.BaseController;
-import com.striveh.callcenter.server.callcenter.service.iservice.ICallTaskService;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.*;
 
 /**
  * @功能:【callTask 呼叫任务表】controller @项目名:callcenterServer @作者:xxx @日期:2020-04-06 12:13:48 @说明：
@@ -83,14 +82,19 @@ public class CallTaskController extends BaseController<CallTaskPojo> {
     try {
       if (StringUtils.isEmpty(callTask.getProjectCode())) {
         optResult = EResCodeServer.svceErrNoProjectCode.getOptResult(logger);
+
       } else if (StringUtils.isEmpty(callTask.getCallTaskCode())) {
         optResult = EResCodeServer.svceErrNoCallTaskCode.getOptResult(logger);
+
       } else if (StringUtils.isEmpty(callTask.getCallGWs())) {
         optResult = EResCodeServer.svceErrNoCallGWs.getOptResult(logger);
+
       } else if (callTask.getCallListId() == null) {
         optResult = EResCodeServer.svceErrNoCallListId.getOptResult(logger);
+
       } else if (callTask.getRate() == null) {
         optResult = EResCodeServer.svceErrNoRate.getOptResult(logger);
+
       } else {
         CallTaskPojo localTask = this.callTaskService.selectUnique(callTask);
         if (localTask != null) {
@@ -99,6 +103,7 @@ public class CallTaskController extends BaseController<CallTaskPojo> {
           this.callTaskService.update(callTask);
           this.callTaskService.getCallList(callTask);
           optResult = EResCodeCommon.svceRigSubmitSuccess.getOptResult(logger);
+
         } else {
           callTask.setAddTime(new Timestamp(System.currentTimeMillis()));
           callTask.setStatus(1);
@@ -122,15 +127,19 @@ public class CallTaskController extends BaseController<CallTaskPojo> {
     try {
       if (StringUtils.isEmpty(callTask.getCallTaskCode())) {
         optResult = EResCodeServer.svceErrNoCallTaskCode.getOptResult(logger);
+
       } else {
         callTask = this.callTaskService.selectUnique(callTask);
         if (callTask == null) {
           optResult = EResCodeServer.svceErrTaskCode.getOptResult(logger);
+
         } else {
           if (callTask.getExpiredTime().getTime() < System.currentTimeMillis()) {
             optResult = EResCodeServer.svceErrTaskExpired.getOptResult(logger);
+
           } else if (callTask.getStatus() > 3) {
             optResult = EResCodeServer.svceErrTaskEnd.getOptResult(logger);
+
           } else {
             // 拨打类型，1预测式拨打2预览式拨打3客户拨入
             if (!callTask.getCallType().equals(3)) {

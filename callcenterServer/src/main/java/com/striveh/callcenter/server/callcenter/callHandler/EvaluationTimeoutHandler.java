@@ -33,7 +33,6 @@ public class EvaluationTimeoutHandler extends KeyExpirationEventMessageListener 
       EslMessage eslMessage = inboundClient.sendSyncApiCommand(params[2], "uuid_kill", params[1]);
       log.info("挂断{}结果{}", params[1], EslHelper.formatEslMessage(eslMessage));
     }
-
     super.onMessage(message, pattern);
   }
 }

@@ -1,4 +1,3 @@
-
 package com.striveh.callcenter.server.ESLEventHandler;
 
 import com.striveh.callcenter.server.ESLEventHandler.customSubEvent.ISubEventHandler;
@@ -18,22 +17,26 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.CUSTOM)
 @Component
 public class CustomEslEventHandler implements EslEventHandler {
-    private InboundClient inboundClient;
-    @Autowired
-    private ApplicationContext applicationContext;
+  
+  private InboundClient inboundClient;
+  @Autowired private ApplicationContext applicationContext;
 
+  protected Logger log = LogManager.getLogger(this.getClass());
 
-    protected Logger log = LogManager.getLogger(this.getClass());
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info("CustomEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
 
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("CustomEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
-
-        try{
-            ISubEventHandler subEventHandler = applicationContext.getBean(event.getEventHeaders().get("Event-Subclass").replace("::","")+"EventHandler",ISubEventHandler.class);
-            subEventHandler.handle(addr,event);
-        }catch (NoSuchBeanDefinitionException ex){
-            log.warn("{}没实现",event.getEventHeaders().get("Event-Subclass").replace("::","")+"EventHandler");
-        }
+    try {
+      ISubEventHandler subEventHandler =
+          applicationContext.getBean(
+              event.getEventHeaders().get("Event-Subclass").replace("::", "") + "EventHandler",
+              ISubEventHandler.class);
+      subEventHandler.handle(addr, event);
+    } catch (NoSuchBeanDefinitionException ex) {
+      log.warn(
+          "{}没实现",
+          event.getEventHeaders().get("Event-Subclass").replace("::", "") + "EventHandler");
     }
+  }
 }

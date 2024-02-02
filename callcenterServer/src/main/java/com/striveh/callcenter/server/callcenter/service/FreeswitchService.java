@@ -1,22 +1,21 @@
 /** */
 package com.striveh.callcenter.server.callcenter.service;
 
-import com.striveh.callcenter.server.callcenter.dao.FreeswitchDao;
 import com.striveh.callcenter.common.base.service.BaseCacheService;
 import com.striveh.callcenter.common.constant.param.ERedisCacheKey;
 import com.striveh.callcenter.common.database.redis.BaseRedisDao;
+import com.striveh.callcenter.pojo.callcenter.FreeswitchPojo;
+import com.striveh.callcenter.server.callcenter.dao.FreeswitchDao;
+import com.striveh.callcenter.server.callcenter.service.iservice.IFreeswitchService;
+import java.util.HashMap;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import link.thingscloud.freeswitch.esl.InboundClient;
 import link.thingscloud.freeswitch.esl.constant.EventNames;
 import link.thingscloud.freeswitch.esl.inbound.option.ServerOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import com.striveh.callcenter.pojo.callcenter.FreeswitchPojo;
-import com.striveh.callcenter.server.callcenter.service.iservice.IFreeswitchService;
-
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @功能:【freeswitch freeswitch服务实例表】Service @项目名:callcenterServer @作者:xxx @日期:2020-05-17
@@ -29,7 +28,7 @@ public class FreeswitchService extends BaseCacheService<FreeswitchPojo, Freeswit
     implements IFreeswitchService {
 
   @Autowired private InboundClient inboundClient;
-  
+
   @Autowired
   @Qualifier("baseRedisDaoDef")
   private BaseRedisDao baseRedisDao;
@@ -65,7 +64,7 @@ public class FreeswitchService extends BaseCacheService<FreeswitchPojo, Freeswit
       FreeswitchPojo freeswitchPojo = new FreeswitchPojo();
       freeswitchPojo.setStatus(1);
       cacheLastVer = lastVer;
-      Map<Long, FreeswitchPojo> map = new HashMap<Long, FreeswitchPojo>();
+      Map<Long, FreeswitchPojo> map = new HashMap<>();
       selectList(freeswitchPojo)
           .forEach(
               freeswitch -> {

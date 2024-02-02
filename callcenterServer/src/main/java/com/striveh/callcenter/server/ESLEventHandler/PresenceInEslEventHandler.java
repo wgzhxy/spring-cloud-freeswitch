@@ -1,4 +1,3 @@
-
 package com.striveh.callcenter.server.ESLEventHandler;
 
 import link.thingscloud.freeswitch.esl.constant.EventNames;
@@ -12,9 +11,11 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.PRESENCE_IN)
 @Component
 public class PresenceInEslEventHandler implements EslEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("PresenceInEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
-    }
+
+  protected Logger log = LogManager.getLogger(this.getClass());
+
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info("PresenceInEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
+  }
 }
