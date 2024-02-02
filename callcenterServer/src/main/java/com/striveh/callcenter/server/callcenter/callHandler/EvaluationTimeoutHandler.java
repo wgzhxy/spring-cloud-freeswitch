@@ -15,25 +15,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class EvaluationTimeoutHandler extends KeyExpirationEventMessageListener {
 
-    protected Logger log = LogManager.getLogger(this.getClass());
+  protected Logger log = LogManager.getLogger(this.getClass());
 
-    @Autowired
-    InboundClient inboundClient;
+  @Autowired InboundClient inboundClient;
 
-    public EvaluationTimeoutHandler(RedisMessageListenerContainer listenerContainer) {
-        super(listenerContainer);
+  public EvaluationTimeoutHandler(RedisMessageListenerContainer listenerContainer) {
+    super(listenerContainer);
+  }
+
+  @Override
+  public void onMessage(Message message, byte[] pattern) {
+    String expiredKey = message.toString();
+    log.info("redis key过期：{}", expiredKey);
+    String[] params = expiredKey.split("_");
+    if (expiredKey.contains(
+        ERedisCacheKey.CALLCENTER_AGENT_SESSION_EVALUATION_PLAYBACK.getCode())) {
+      EslMessage eslMessage = inboundClient.sendSyncApiCommand(params[2], "uuid_kill", params[1]);
+      log.info("挂断{}结果{}", params[1], EslHelper.formatEslMessage(eslMessage));
     }
 
-    @Override
-    public void onMessage(Message message, byte[] pattern) {
-        String expiredKey = message.toString();
-        log.info("redis key过期：{}", expiredKey);
-        String [] params = expiredKey.split("_");
-        if (expiredKey.contains(ERedisCacheKey.CALLCENTER_AGENT_SESSION_EVALUATION_PLAYBACK.getCode())){
-            EslMessage eslMessage = inboundClient.sendSyncApiCommand(params[2], "uuid_kill",params[1]);
-            log.info("挂断{}结果{}",params[1], EslHelper.formatEslMessage(eslMessage));
-        }
-
-        super.onMessage(message, pattern);
-    }
+    super.onMessage(message, pattern);
+  }
 }

@@ -7,35 +7,39 @@ import org.apache.logging.log4j.Logger;
 
 public class CallThread implements Runnable {
 
-    protected Logger log = LogManager.getLogger(this.getClass());
+  protected Logger log = LogManager.getLogger(this.getClass());
 
-    private InboundClient inboundClient;
+  private InboundClient inboundClient;
 
-    private String callStr;
+  private String callStr;
 
-    public CallThread(InboundClient inboundClient,String callStr) {
-        this.inboundClient = inboundClient;
-        this.callStr = callStr;
-    }
+  public CallThread(InboundClient inboundClient, String callStr) {
+    this.inboundClient = inboundClient;
+    this.callStr = callStr;
+  }
 
-    public InboundClient getInboundClient() {
-        return inboundClient;
-    }
+  public InboundClient getInboundClient() {
+    return inboundClient;
+  }
 
-    public void setInboundClient(InboundClient inboundClient) {
-        this.inboundClient = inboundClient;
-    }
+  public void setInboundClient(InboundClient inboundClient) {
+    this.inboundClient = inboundClient;
+  }
 
-    public String getCallStr() {
-        return callStr;
-    }
+  public String getCallStr() {
+    return callStr;
+  }
 
-    public void setCallStr(String callStr) {
-        this.callStr = callStr;
-    }
+  public void setCallStr(String callStr) {
+    this.callStr = callStr;
+  }
 
-    @Override
-    public void run() {
-        log.info("执行了{},{}",callStr,inboundClient.sendAsyncApiCommand(inboundClient.option().serverOptions().get(0).addr(),"originate",callStr));
-    }
+  @Override
+  public void run() {
+    log.info(
+        "执行了{},{}",
+        callStr,
+        inboundClient.sendAsyncApiCommand(
+            inboundClient.option().serverOptions().get(0).addr(), "originate", callStr));
+  }
 }
