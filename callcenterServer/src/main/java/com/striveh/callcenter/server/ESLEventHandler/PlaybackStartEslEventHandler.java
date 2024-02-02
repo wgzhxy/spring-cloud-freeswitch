@@ -12,9 +12,14 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.PLAYBACK_START)
 @Component
 public class PlaybackStartEslEventHandler implements EslEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("PlaybackStartEslEventHandler handle addr[{}] EslEvent[{}].", addr, EslHelper.formatEslEvent(event));
-    }
+  
+  protected Logger log = LogManager.getLogger(this.getClass());
+
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info(
+        "PlaybackStartEslEventHandler handle addr[{}] EslEvent[{}].",
+        addr,
+        EslHelper.formatEslEvent(event));
+  }
 }

@@ -15,19 +15,29 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.PLAYBACK_STOP)
 @Component
 public class PlaybackStopEslEventHandler implements EslEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
-    @Autowired
-    InboundClient inboundClient;
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("PlaybackStopEslEventHandler handle addr[{}] EslEvent[{}].", addr, EslHelper.formatEslEvent(event));
-        if (event.getEventHeaders().get("Playback-File-Path").contains("bye")){
-            EslMessage eslMessage = inboundClient.sendSyncApiCommand(addr, "uuid_kill",event.getEventHeaders().get("Caller-Unique-ID"));
-            log.info("坐席{}挂断{}结果{}",event.getEventHeaders().get("Other-Leg-Destination-Number"),event.getEventHeaders().get("Caller-Unique-ID"), EslHelper.formatEslMessage(eslMessage));
-        }else if (event.getEventHeaders().get("Playback-File-Path").contains("evaluation")){
 
-        }else {
+  protected Logger log = LogManager.getLogger(this.getClass());
+  @Autowired InboundClient inboundClient;
 
-        }
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info(
+        "PlaybackStopEslEventHandler handle addr[{}] EslEvent[{}].",
+        addr,
+        EslHelper.formatEslEvent(event));
+    if (event.getEventHeaders().get("Playback-File-Path").contains("bye")) {
+      EslMessage eslMessage =
+          inboundClient.sendSyncApiCommand(
+              addr, "uuid_kill", event.getEventHeaders().get("Caller-Unique-ID"));
+      log.info(
+          "坐席{}挂断{}结果{}",
+          event.getEventHeaders().get("Other-Leg-Destination-Number"),
+          event.getEventHeaders().get("Caller-Unique-ID"),
+          EslHelper.formatEslMessage(eslMessage));
+    } else if (event.getEventHeaders().get("Playback-File-Path").contains("evaluation")) {
+
+    } else {
+
     }
+  }
 }

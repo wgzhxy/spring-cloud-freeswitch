@@ -10,55 +10,76 @@ import com.striveh.callcenter.common.base.pojo.BasePojo;
  * <pre></pre>
  */
 public class CallLogPojo extends BasePojo {
+
   /** 序列化UID */
   private static final long serialVersionUID = 1L;
+
   /** callUUID */
   private String callUUID;
+
   /** 主叫号码 */
   private String callerIdNumber;
+
   /** 被叫号码 */
   private String destinationNumber;
+
   /** 录音文件在文件服务器的地址 */
   private String recordFile;
 
   private String recordFileQiniu;
+
   /** 开始时间 */
   private Timestamp startTimestamp;
+
   /** 结束时间 */
   private Timestamp endTimestamp;
+
   /** 持续时间,单位秒 */
   private Long duration;
+
   /** 计费时长,单位秒 */
   private Long billsec;
+
   /** 添加时间 */
   private Timestamp addTime;
+
   /** 更新时间 */
   private Timestamp updateTime;
+
   /** 呼叫结果 */
   private String result;
 
   private String[] results;
+
   /** 呼叫结果详情 */
   private String resultDetail;
 
   private String[] resultDetails;
+
   /** 项目代码 */
   private String projectCode;
+
   /** 任务代码 */
   private String callTaskCode;
+
   /** 网关代码 */
   private String gwCode;
+
   /** 每多少秒多少钱[用|隔开] 格式：50|0.6 */
   private String priceRule;
+
   /** 实际计算价格 * */
   private Double priceCal;
+
   /** FS外呼结果 */
   private String hangupCase;
+
   /** 用户满意度评分，1非常满意2满意3不满意 */
   private Integer evaluation;
 
   /** 查询开始时间 */
   private Timestamp beginTime;
+
   /** 查询结束时间 */
   private Timestamp endTime;
 

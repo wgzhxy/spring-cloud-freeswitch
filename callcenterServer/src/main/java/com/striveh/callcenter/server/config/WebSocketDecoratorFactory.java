@@ -12,21 +12,24 @@ import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
 @Component
 public class WebSocketDecoratorFactory implements WebSocketHandlerDecoratorFactory {
 
-    protected Logger log = LogManager.getLogger(this.getClass());
+  protected Logger log = LogManager.getLogger(this.getClass());
 
-    @Override
-    public WebSocketHandler decorate(WebSocketHandler handler) {
-        return new WebSocketHandlerDecorator(handler) {
-            @Override
-            public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-                log.info("有人连接啦  sessionId = {}", session.getId());
-                super.afterConnectionEstablished(session);
-            }
-            @Override
-            public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-                log.info("有人退出连接啦  sessionId = {}", session.getId());
-                super.afterConnectionClosed(session, closeStatus);
-            }
-        };
-    }
+  @Override
+  public WebSocketHandler decorate(WebSocketHandler handler) {
+    return new WebSocketHandlerDecorator(handler) {
+
+      @Override
+      public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        log.info("有人连接啦  sessionId = {}", session.getId());
+        super.afterConnectionEstablished(session);
+      }
+
+      @Override
+      public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus)
+          throws Exception {
+        log.info("有人退出连接啦  sessionId = {}", session.getId());
+        super.afterConnectionClosed(session, closeStatus);
+      }
+    };
+  }
 }

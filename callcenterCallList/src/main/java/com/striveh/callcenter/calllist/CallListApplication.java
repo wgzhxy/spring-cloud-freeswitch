@@ -6,13 +6,18 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication(scanBasePackages = {"com.striveh.callcenter.calllist","com.striveh.callcenter.common","com.striveh.callcenter.feignclient"},
-		exclude = {ErrorMvcAutoConfiguration.class})
+@SpringBootApplication(
+    scanBasePackages = {
+      "com.striveh.callcenter.calllist",
+      "com.striveh.callcenter.common",
+      "com.striveh.callcenter.feignclient"
+    },
+    exclude = {ErrorMvcAutoConfiguration.class})
 @EnableEurekaClient
 @EnableFeignClients(basePackages = {"com.striveh.callcenter.feignclient"})
 public class CallListApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CallListApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(CallListApplication.class, args);
+  }
 }

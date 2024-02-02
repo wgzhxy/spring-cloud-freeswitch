@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 public class BaseController<T extends BasePojo> extends AbsBaseController<T> {
-    /** redis操作 */
-    @Qualifier("baseRedisDaoDef")
-    @Autowired
-    protected BaseRedisDao baseRedisDao;
 
+  /** redis操作 */
+  @Qualifier("baseRedisDaoDef")
+  @Autowired
+  protected BaseRedisDao baseRedisDao;
 }

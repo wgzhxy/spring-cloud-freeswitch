@@ -21,52 +21,48 @@ import java.util.Map;
 @RestController
 @RequestMapping("/websocket")
 public class WebSocketTestController {
-    protected Logger logger = LogManager.getLogger(this.getClass());
+  protected Logger logger = LogManager.getLogger(this.getClass());
 
-    @Autowired
-    private SimpMessageSendingOperations msgOperations;
-    @Autowired
-    private CallTaskService callTaskService;
-    @Autowired
-    private IUserInfoServiceApi userInfoServiceApi;
-    @Autowired
-    private InboundClient inboundClient;
+  @Autowired private SimpMessageSendingOperations msgOperations;
+  @Autowired private CallTaskService callTaskService;
+  @Autowired private IUserInfoServiceApi userInfoServiceApi;
+  @Autowired private InboundClient inboundClient;
 
-    @GetMapping("/invite")
-    public void invite(String telNo,String username) {
-        Map<String,String> body=new HashMap<>();
-        body.put("telNo",telNo);
-        body.put("callId", StringTool.getSerno());
-        body.put("callTaskCode", StringTool.getRandom(4));
-        msgOperations.convertAndSend("/topic/invite/" + username, JsonTool.getJsonString(body));
-    }
+  @GetMapping("/invite")
+  public void invite(String telNo, String username) {
+    Map<String, String> body = new HashMap<>();
+    body.put("telNo", telNo);
+    body.put("callId", StringTool.getSerno());
+    body.put("callTaskCode", StringTool.getRandom(4));
+    msgOperations.convertAndSend("/topic/invite/" + username, JsonTool.getJsonString(body));
+  }
 
-    @GetMapping("/bye")
-    public void bye(String telNo,String username) {
-        Map<String,String> body=new HashMap<>();
-        body.put("telNo",telNo);
-        body.put("callId", StringTool.getSerno());
-        body.put("callTaskCode", StringTool.getRandom(4));
-        msgOperations.convertAndSend("/topic/bye/" + username, JsonTool.getJsonString(body));
-    }
+  @GetMapping("/bye")
+  public void bye(String telNo, String username) {
+    Map<String, String> body = new HashMap<>();
+    body.put("telNo", telNo);
+    body.put("callId", StringTool.getSerno());
+    body.put("callTaskCode", StringTool.getRandom(4));
+    msgOperations.convertAndSend("/topic/bye/" + username, JsonTool.getJsonString(body));
+  }
 
-    @GetMapping("/status")
-    public void status(String status,String username) {
-        UserinfoPojo userinfoPojo= this.userInfoServiceApi.getByUsername(username);
-        userinfoPojo.setWorkStatus(Integer.valueOf(status));
-        msgOperations.convertAndSend("/topic/status/" + username, userinfoPojo);
-    }
+  @GetMapping("/status")
+  public void status(String status, String username) {
+    UserinfoPojo userinfoPojo = this.userInfoServiceApi.getByUsername(username);
+    userinfoPojo.setWorkStatus(Integer.valueOf(status));
+    msgOperations.convertAndSend("/topic/status/" + username, userinfoPojo);
+  }
 
-    @GetMapping("/task")
-    public void task(String projectCode) {
-        CallTaskPojo callTaskPojo = new CallTaskPojo();
-        callTaskPojo.setProjectCode(projectCode);
-        msgOperations.convertAndSend("/topic/task/" + projectCode, this.callTaskService.selectUnique(callTaskPojo));
-    }
+  @GetMapping("/task")
+  public void task(String projectCode) {
+    CallTaskPojo callTaskPojo = new CallTaskPojo();
+    callTaskPojo.setProjectCode(projectCode);
+    msgOperations.convertAndSend(
+        "/topic/task/" + projectCode, this.callTaskService.selectUnique(callTaskPojo));
+  }
 
-    @GetMapping("/notify")
-    public void notify(String projectCode,String content) {
-        msgOperations.convertAndSend("/topic/notify/" + projectCode, content);
-    }
-
+  @GetMapping("/notify")
+  public void notify(String projectCode, String content) {
+    msgOperations.convertAndSend("/topic/notify/" + projectCode, content);
+  }
 }

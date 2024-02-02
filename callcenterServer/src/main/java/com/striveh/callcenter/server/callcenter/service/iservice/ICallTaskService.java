@@ -12,38 +12,43 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @功能:【callTask 呼叫任务表】IService
- * @项目名:callcenterServer
- * @作者:xxx
- * @日期:2020-04-06 12:13:48
- * @说明：<pre></pre>
+ * @功能:【callTask 呼叫任务表】IService @项目名:callcenterServer @作者:xxx @日期:2020-04-06 12:13:48 @说明：
+ *
+ * <pre></pre>
  */
 public interface ICallTaskService extends IBaseService<CallTaskPojo> {
 
-    void getCallList(CallTaskPojo callTask);
-    void additionalCallList(CallTaskPojo callTask);
-    void start(CallTaskPojo callTask);
-    void pause(CallTaskPojo callTask);
-    void end(CallTaskPojo callTask);
-    void updateCacheAfterPorjectEnd(CallTaskPojo callTask);
-    List<UserinfoPojo> getUserinfoPojos(CallProjectPojo callProjectPojo);
+  void getCallList(CallTaskPojo callTask);
 
-    void reloadGateway(GatewayPojo gatewayPojo);
+  void additionalCallList(CallTaskPojo callTask);
 
-    List<CallTaskPojo> getProcList(CallTaskPojo callTaskPojo);
+  void start(CallTaskPojo callTask);
 
-    CallTaskPojo getProc(CallTaskPojo callTaskPojo);
+  void pause(CallTaskPojo callTask);
 
-    void notifyCount(CallTaskPojo e,String uncallListSyncStatus);
-    void notifyAgentStatus(UserinfoPojo userinfoPojo);
+  void end(CallTaskPojo callTask);
 
-    void callTimeout(CallTaskPojo e);
+  void updateCacheAfterPorjectEnd(CallTaskPojo callTask);
 
-    void setCallParams(Integer rateLimit,Long sleep,Integer originateTimeout);
+  List<UserinfoPojo> getUserinfoPojos(CallProjectPojo callProjectPojo);
 
-    void previewCall(String params);
+  void reloadGateway(GatewayPojo gatewayPojo);
 
-    List<CallListPojo> getCallList(CallTaskPojo callTaskPojo, Integer count);
+  List<CallTaskPojo> getProcList(CallTaskPojo callTaskPojo);
 
-    void agentCall(Map<String, String> map, String username, String telNo);
+  CallTaskPojo getProc(CallTaskPojo callTaskPojo);
+
+  void notifyCount(CallTaskPojo e, String uncallListSyncStatus);
+
+  void notifyAgentStatus(UserinfoPojo userinfoPojo);
+
+  void callTimeout(CallTaskPojo e);
+
+  void setCallParams(Integer rateLimit, Long sleep, Integer originateTimeout);
+
+  void previewCall(String params);
+
+  List<CallListPojo> getCallList(CallTaskPojo callTaskPojo, Integer count);
+
+  void agentCall(Map<String, String> map, String username, String telNo);
 }

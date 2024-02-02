@@ -15,19 +15,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReScheduleEslEventHandler implements EslEventHandler {
 
-    private InboundClient inboundClient;
-    @Autowired
-    private ApplicationContext applicationContext;
+  private InboundClient inboundClient;
+  @Autowired private ApplicationContext applicationContext;
 
-    protected Logger log = LogManager.getLogger(this.getClass());
+  protected Logger log = LogManager.getLogger(this.getClass());
 
-    @Override
-    public void handle(String addr, EslEvent event) {
-        if (inboundClient==null){
-            inboundClient= applicationContext.getBean(InboundClient.class);
-        }
-        log.info("ReScheduleEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
-//        EslMessage eslMessage = inboundClient.sendSyncApiCommand(addr, "version", null);
-//        log.info("{}", EslHelper.formatEslMessage(eslMessage));
+  @Override
+  public void handle(String addr, EslEvent event) {
+    if (inboundClient == null) {
+      inboundClient = applicationContext.getBean(InboundClient.class);
     }
+    log.info("ReScheduleEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
+    //        EslMessage eslMessage = inboundClient.sendSyncApiCommand(addr, "version", null);
+    //        log.info("{}", EslHelper.formatEslMessage(eslMessage));
+  }
 }

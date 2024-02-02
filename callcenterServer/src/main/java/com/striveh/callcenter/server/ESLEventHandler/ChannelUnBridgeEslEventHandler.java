@@ -14,10 +14,14 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.CHANNEL_UNBRIDGE)
 @Component
 public class ChannelUnBridgeEslEventHandler implements EslEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
 
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("ChannelUnBridgeEslEventHandler handle addr[{}] EslEvent[{}].", addr, EslHelper.formatEslEvent(event));
-    }
+  protected Logger log = LogManager.getLogger(this.getClass());
+
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info(
+        "ChannelUnBridgeEslEventHandler handle addr[{}] EslEvent[{}].",
+        addr,
+        EslHelper.formatEslEvent(event));
+  }
 }

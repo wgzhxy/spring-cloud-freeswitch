@@ -8,10 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component("sofiaexpireEventHandler")
 public class ExpireEventHandler implements ISubEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("sofiaexpireEventHandler:{},{}",addr, EslHelper.formatEslEvent(event));
+  
+  protected Logger log = LogManager.getLogger(this.getClass());
 
-    }
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info("sofiaexpireEventHandler:{},{}", addr, EslHelper.formatEslEvent(event));
+  }
 }

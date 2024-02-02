@@ -12,9 +12,12 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.API)
 @Component
 public class ApiEslEventHandler implements EslEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("ApiEslEventHandler handle addr[{}] EslEvent[{}].", addr, EslHelper.formatEslEvent(event));
-    }
+
+  protected Logger log = LogManager.getLogger(this.getClass());
+
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info(
+        "ApiEslEventHandler handle addr[{}] EslEvent[{}].", addr, EslHelper.formatEslEvent(event));
+  }
 }

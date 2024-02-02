@@ -11,9 +11,11 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.CHANNEL_STATE)
 @Component
 public class ChannelStateEslEventHandler implements EslEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("ChannelStateEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
-    }
+
+  protected Logger log = LogManager.getLogger(this.getClass());
+
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info("ChannelStateEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
+  }
 }

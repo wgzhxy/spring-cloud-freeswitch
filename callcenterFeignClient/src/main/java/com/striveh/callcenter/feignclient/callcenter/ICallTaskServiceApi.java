@@ -9,17 +9,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-
 @FeignClient("callcenter")
 public interface ICallTaskServiceApi {
 
+  @RequestMapping(value = "/callTask/inner/getListByStatus", method = RequestMethod.GET)
+  List<CallTaskPojo> getListByStatus(@RequestParam Integer status);
 
-    @RequestMapping(value = "/callTask/inner/getListByStatus",method = RequestMethod.GET)
-    List<CallTaskPojo> getListByStatus(@RequestParam Integer status);
+  @RequestMapping(value = "/callTask/inner/addGateway", method = RequestMethod.POST)
+  boolean addGateway(GatewayPojo gatewayPojo);
 
-    @RequestMapping(value = "/callTask/inner/addGateway",method = RequestMethod.POST)
-    boolean addGateway(GatewayPojo gatewayPojo);
-
-    @RequestMapping(value = "/callTask/inner/updateGateway",method = RequestMethod.POST)
-    boolean updateGateway(GatewayPojo gatewayPojo);
+  @RequestMapping(value = "/callTask/inner/updateGateway", method = RequestMethod.POST)
+  boolean updateGateway(GatewayPojo gatewayPojo);
 }

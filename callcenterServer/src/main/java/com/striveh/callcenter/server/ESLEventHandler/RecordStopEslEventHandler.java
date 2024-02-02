@@ -19,10 +19,13 @@ import java.sql.Timestamp;
 @Component
 public class RecordStopEslEventHandler implements EslEventHandler {
 
-    protected Logger log = LogManager.getLogger(this.getClass());
+  protected Logger log = LogManager.getLogger(this.getClass());
 
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("RecordStopEslEventHandler handle addr[{}] EslEvent[{}].", addr, EslHelper.formatEslEvent(event));
-    }
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info(
+        "RecordStopEslEventHandler handle addr[{}] EslEvent[{}].",
+        addr,
+        EslHelper.formatEslEvent(event));
+  }
 }

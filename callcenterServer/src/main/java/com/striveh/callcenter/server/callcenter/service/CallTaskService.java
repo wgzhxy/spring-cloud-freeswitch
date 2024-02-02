@@ -53,6 +53,8 @@ public class CallTaskService extends BaseService<CallTaskPojo, CallTaskDao>
   @Autowired private ICallListServiceApi callListServiceApi;
   @Autowired private InboundClient inboundClient;
   @Autowired private ICallLogService callLogService;
+  @Autowired private IUserInfoServiceApi userInfoServiceApi;
+  @Autowired private ICallProjectService callProjectService;
 
   @Autowired
   @Qualifier("baseRedisDaoDef")
@@ -61,9 +63,6 @@ public class CallTaskService extends BaseService<CallTaskPojo, CallTaskDao>
   @Autowired
   @Qualifier("baseRedisDaoDBCache")
   private BaseRedisDao baseRedisDaoDBCache;
-
-  @Autowired private IUserInfoServiceApi userInfoServiceApi;
-  @Autowired private ICallProjectService callProjectService;
 
   @Value("${common.callTaskNotify.url}")
   private String callTaskNotifyUrl;
@@ -273,11 +272,13 @@ public class CallTaskService extends BaseService<CallTaskPojo, CallTaskDao>
   }
 
   private void callCustomer(CallTaskPojo callTask) {
+
     logger.info("任务{}启动", callTask.getCallTaskCode());
     callTaskPojos.add(callTask);
     CallProjectPojo callProjectPojo = new CallProjectPojo();
     callProjectPojo.setProjectCode(callTask.getProjectCode());
     callProjectPojo = this.callProjectService.selectUnique(callProjectPojo);
+
     // 执行任务
     CallThreadPoolManager callThreadPoolManager = new CallThreadPoolManager(inboundClient);
 

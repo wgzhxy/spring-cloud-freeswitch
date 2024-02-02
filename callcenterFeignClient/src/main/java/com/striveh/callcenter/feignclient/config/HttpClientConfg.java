@@ -14,78 +14,83 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "common.httpclient.config")
 public class HttpClientConfg {
 
-    /** 连接数 */
-    private Integer connectionManagerMaxTotal;
-    /** 连接数 */
-    private Integer connectionManagerMaxPerRoute;
-    /** 超时时间 */
-    private Integer connectionTimeOut;
-    /** 超时时间 */
-    private Integer socketTimeOut;
-    /** 超时时间 */
-    private Integer requestTimeout;
+  /** 连接数 */
+  private Integer connectionManagerMaxTotal;
+  /** 连接数 */
+  private Integer connectionManagerMaxPerRoute;
+  /** 超时时间 */
+  private Integer connectionTimeOut;
+  /** 超时时间 */
+  private Integer socketTimeOut;
+  /** 超时时间 */
+  private Integer requestTimeout;
 
-    @Bean
-    public HttpClient httpClient(HttpClientBuilder httpClientBuilder){
-        return httpClientBuilder.build();
-    }
+  @Bean
+  public HttpClient httpClient(HttpClientBuilder httpClientBuilder) {
+    return httpClientBuilder.build();
+  }
 
-    @Bean
-    public PoolingHttpClientConnectionManager poolingHttpClientConnectionManager(){
-        PoolingHttpClientConnectionManager poolingHttpClientConnectionManager = new PoolingHttpClientConnectionManager();
-        poolingHttpClientConnectionManager.setMaxTotal(connectionManagerMaxTotal);
-        poolingHttpClientConnectionManager.setDefaultMaxPerRoute(connectionManagerMaxPerRoute);
-        return poolingHttpClientConnectionManager;
-    }
+  @Bean
+  public PoolingHttpClientConnectionManager poolingHttpClientConnectionManager() {
+    PoolingHttpClientConnectionManager poolingHttpClientConnectionManager =
+        new PoolingHttpClientConnectionManager();
+    poolingHttpClientConnectionManager.setMaxTotal(connectionManagerMaxTotal);
+    poolingHttpClientConnectionManager.setDefaultMaxPerRoute(connectionManagerMaxPerRoute);
+    return poolingHttpClientConnectionManager;
+  }
 
-    @Bean
-    public HttpClientBuilder httpClientBuilder(HttpClientConnectionManager connectionManager){
-        RequestConfig requestConfig = RequestConfig.custom().setConnectTimeout(connectionTimeOut).setSocketTimeout(socketTimeOut)
-                .setConnectionRequestTimeout(requestTimeout).build();
-        HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
-        httpClientBuilder.setConnectionManager(connectionManager);
-        httpClientBuilder.setDefaultRequestConfig(requestConfig);
-        httpClientBuilder.setRetryHandler(new DefaultHttpRequestRetryHandler(0,false));
-        return httpClientBuilder;
-    }
+  @Bean
+  public HttpClientBuilder httpClientBuilder(HttpClientConnectionManager connectionManager) {
+    RequestConfig requestConfig =
+        RequestConfig.custom()
+            .setConnectTimeout(connectionTimeOut)
+            .setSocketTimeout(socketTimeOut)
+            .setConnectionRequestTimeout(requestTimeout)
+            .build();
+    HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+    httpClientBuilder.setConnectionManager(connectionManager);
+    httpClientBuilder.setDefaultRequestConfig(requestConfig);
+    httpClientBuilder.setRetryHandler(new DefaultHttpRequestRetryHandler(0, false));
+    return httpClientBuilder;
+  }
 
-    public Integer getConnectionManagerMaxTotal() {
-        return connectionManagerMaxTotal;
-    }
+  public Integer getConnectionManagerMaxTotal() {
+    return connectionManagerMaxTotal;
+  }
 
-    public void setConnectionManagerMaxTotal(Integer connectionManagerMaxTotal) {
-        this.connectionManagerMaxTotal = connectionManagerMaxTotal;
-    }
+  public void setConnectionManagerMaxTotal(Integer connectionManagerMaxTotal) {
+    this.connectionManagerMaxTotal = connectionManagerMaxTotal;
+  }
 
-    public Integer getConnectionManagerMaxPerRoute() {
-        return connectionManagerMaxPerRoute;
-    }
+  public Integer getConnectionManagerMaxPerRoute() {
+    return connectionManagerMaxPerRoute;
+  }
 
-    public void setConnectionManagerMaxPerRoute(Integer connectionManagerMaxPerRoute) {
-        this.connectionManagerMaxPerRoute = connectionManagerMaxPerRoute;
-    }
+  public void setConnectionManagerMaxPerRoute(Integer connectionManagerMaxPerRoute) {
+    this.connectionManagerMaxPerRoute = connectionManagerMaxPerRoute;
+  }
 
-    public Integer getConnectionTimeOut() {
-        return connectionTimeOut;
-    }
+  public Integer getConnectionTimeOut() {
+    return connectionTimeOut;
+  }
 
-    public void setConnectionTimeOut(Integer connectionTimeOut) {
-        this.connectionTimeOut = connectionTimeOut;
-    }
+  public void setConnectionTimeOut(Integer connectionTimeOut) {
+    this.connectionTimeOut = connectionTimeOut;
+  }
 
-    public Integer getSocketTimeOut() {
-        return socketTimeOut;
-    }
+  public Integer getSocketTimeOut() {
+    return socketTimeOut;
+  }
 
-    public void setSocketTimeOut(Integer socketTimeOut) {
-        this.socketTimeOut = socketTimeOut;
-    }
+  public void setSocketTimeOut(Integer socketTimeOut) {
+    this.socketTimeOut = socketTimeOut;
+  }
 
-    public Integer getRequestTimeout() {
-        return requestTimeout;
-    }
+  public Integer getRequestTimeout() {
+    return requestTimeout;
+  }
 
-    public void setRequestTimeout(Integer requestTimeout) {
-        this.requestTimeout = requestTimeout;
-    }
+  public void setRequestTimeout(Integer requestTimeout) {
+    this.requestTimeout = requestTimeout;
+  }
 }

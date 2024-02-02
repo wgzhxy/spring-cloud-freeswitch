@@ -11,6 +11,9 @@ import java.util.List;
 @FeignClient("callList")
 public interface ICallListServiceApi {
 
-    @RequestMapping(value = "/callList/inner/getListByCallListId",method = RequestMethod.GET)
-    List<CallListPojo> getListByCallListId(@RequestParam Long callListId,@RequestParam Integer size,@RequestParam(required = false) Long lastId);
+  @RequestMapping(value = "/callList/inner/getListByCallListId", method = RequestMethod.GET)
+  List<CallListPojo> getListByCallListId(
+      @RequestParam Long callListId,
+      @RequestParam Integer size,
+      @RequestParam(required = false) Long lastId);
 }

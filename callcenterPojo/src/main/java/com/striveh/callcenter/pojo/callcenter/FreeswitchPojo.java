@@ -10,26 +10,37 @@ import com.striveh.callcenter.common.base.pojo.BasePojo;
  * <pre></pre>
  */
 public class FreeswitchPojo extends BasePojo {
+
   /** 序列化UID */
   private static final long serialVersionUID = 1L;
+
   /** 服务实例主机地址 */
   private String host;
+
   /** 服务实例主机ESL端口 */
   private Integer port;
+
   /** 服务实例主机ESL密码 */
   private String password;
+
   /** 支持的最大通话并发数 */
   private Integer callConcurrent;
+
   /** 状态0停用1启用 */
   private Integer status;
+
   /** 添加时间 */
   private Timestamp addTime;
+
   /** 更新时间 */
   private Timestamp updateTime;
+
   /** 服务实例用于native软电话使用的服务地址 */
   private String nativeSipPhone;
+
   /** 服务实例用于web软电话使用的服务地址 */
   private String webSipPhone;
+
   /** 服务能力权重 */
   private Integer weight;
 
