@@ -28,7 +28,7 @@ public class HeartbeatEslEventHandler implements EslEventHandler {
         addr,
         EslHelper.formatEslEvent(event));
     EslMessage message_status = inboundClient.sendSyncApiCommand(addr, "status", null);
-    log.info("FreeSWITCH:{}status:{}", addr, EslHelper.formatEslMessage(message_status));
+    log.info("FreeSWITCH:{} status:{}", addr, EslHelper.formatEslMessage(message_status));
     EslMessage message_registers =
         inboundClient.sendSyncApiCommand(addr, "sofia status profile internal reg", null);
 

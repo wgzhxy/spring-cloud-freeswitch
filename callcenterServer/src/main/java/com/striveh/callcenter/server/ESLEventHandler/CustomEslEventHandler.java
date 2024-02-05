@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.CUSTOM)
 @Component
 public class CustomEslEventHandler implements EslEventHandler {
-  
+
   private InboundClient inboundClient;
   @Autowired private ApplicationContext applicationContext;
 
@@ -26,7 +26,6 @@ public class CustomEslEventHandler implements EslEventHandler {
   @Override
   public void handle(String addr, EslEvent event) {
     log.info("CustomEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
-
     try {
       ISubEventHandler subEventHandler =
           applicationContext.getBean(

@@ -7,11 +7,17 @@ import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 
-@SpringBootApplication(scanBasePackages = {"com.striveh.callcenter.gateway","com.striveh.callcenter.common"},
-		exclude = {ErrorMvcAutoConfiguration.class,DruidDataSourceAutoConfigure.class,DataSourceAutoConfiguration.class, RedisAutoConfiguration.class})
+@SpringBootApplication(
+    scanBasePackages = {"com.striveh.callcenter.gateway", "com.striveh.callcenter.common"},
+    exclude = {
+      ErrorMvcAutoConfiguration.class,
+      DruidDataSourceAutoConfigure.class,
+      DataSourceAutoConfiguration.class,
+      RedisAutoConfiguration.class
+    })
 public class GatewayApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GatewayApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(GatewayApplication.class, args);
+  }
 }

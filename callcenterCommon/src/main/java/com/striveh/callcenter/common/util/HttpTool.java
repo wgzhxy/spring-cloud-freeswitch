@@ -51,7 +51,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 public class HttpTool {
-  
+
   /** 日志对象 */
   protected static Logger logger = LogManager.getLogger(HttpTool.class);
 

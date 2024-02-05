@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public abstract class AbsCodeMakerService {
+
   /** 日志 */
   protected Logger logger = LogManager.getLogger(this.getClass());
 

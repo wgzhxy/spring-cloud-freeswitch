@@ -2,7 +2,6 @@
 package com.striveh.callcenter.common.base.pojo;
 
 import com.striveh.callcenter.common.util.JsonTool;
-
 import java.io.Serializable;
 
 public class BasePojo implements Serializable {
@@ -10,7 +9,6 @@ public class BasePojo implements Serializable {
   private static final long serialVersionUID = 1L;
   /** id */
   private Long id;
-
   /** 分页：第几页 */
   private Integer pageNum;
   /** 分页：每页显示条数 */

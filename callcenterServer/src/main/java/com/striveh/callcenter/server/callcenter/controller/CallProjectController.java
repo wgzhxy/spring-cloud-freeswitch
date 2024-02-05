@@ -179,14 +179,13 @@ public class CallProjectController extends BaseController<CallProjectPojo> {
       //				userinfoPojo.setServers(sipServer);
       //				userinfoPojo.setUri("sip:"+userinfoPojo.getUsername()+"@"+sipUri);
       //				userinfoPojo.setNativeServers(sipUri+":5161");
-      //
       //				if (userinfoPojo.getProjectId()!=null){
       //					FreeswitchPojo freeswitchPojo = this.freeswitchService.getCacheDataByKey(new
-      // FreeswitchPojo(callProjectPojo.getFreeswitchId()));
+      //                    FreeswitchPojo(callProjectPojo.getFreeswitchId()));
       //					userinfoPojo.setServers(freeswitchPojo.getWebSipPhone());
       //					userinfoPojo.setNativeServers(freeswitchPojo.getNativeSipPhone());
       //
-      //	userinfoPojo.setUri("sip:"+userinfoPojo.getUsername()+"@"+freeswitchPojo.getNativeSipPhone());
+      // userinfoPojo.setUri("sip:"+userinfoPojo.getUsername()+"@"+freeswitchPojo.getNativeSipPhone());
       //				}
       //			}
     } catch (Exception ex) {

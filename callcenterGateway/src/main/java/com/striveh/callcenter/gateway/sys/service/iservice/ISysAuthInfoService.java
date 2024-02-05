@@ -6,6 +6,7 @@ import com.striveh.callcenter.common.base.service.iservice.IBaseCacheService;
 import com.striveh.callcenter.pojo.sys.SysAuthInfoPojo;
 
 public interface ISysAuthInfoService extends IBaseCacheService<SysAuthInfoPojo, SysAuthInfoPojo> {
+
   /**
    * 验证签名是否正确
    *

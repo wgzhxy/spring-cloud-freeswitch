@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 @Component("sofiaunregisterEventHandler")
 public class UnregisterEventHandler implements ISubEventHandler {
-  
+
   protected Logger log = LogManager.getLogger(this.getClass());
   @Autowired private InboundClient inboundClient;
   @Autowired private IUserInfoServiceApi userInfoServiceApi;
@@ -54,6 +54,7 @@ public class UnregisterEventHandler implements ISubEventHandler {
             "摘机坐席{}注销置忙{}", userinfoPojo.getUsername(), EslHelper.formatEslMessage(eslMessage));
         userinfoPojo.setWorkStatus(0);
       }
+
       CallProjectPojo callProjectPojo = new CallProjectPojo();
       callProjectPojo.setId(userinfoPojo.getProjectId());
       callProjectPojo = this.callProjectService.selectUnique(callProjectPojo);
@@ -93,10 +94,12 @@ public class UnregisterEventHandler implements ISubEventHandler {
       userinfoPojo.setSessionStatus(null);
       this.userInfoServiceApi.update(userinfoPojo);
       log.info("坐席{}注销", event.getEventHeaders().get("from-user"));
+
     } else if (userinfoPojo != null && userinfoPojo.getType().equals(3)) {
       userinfoPojo.setStatus(0);
       msgOperations.convertAndSend(
           "/topic/register/" + event.getEventHeaders().get("from-user"), userinfoPojo);
+
       userinfoPojo.setSessionStatus(null);
       userinfoPojo.setWorkStatus(null);
       userinfoPojo.setProjectId(null);

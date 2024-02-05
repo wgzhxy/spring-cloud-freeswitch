@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/userinfo")
 public class UserinfoController extends BaseController<UserinfoPojo> {
-  
+
   /** userinfo service */
   @Autowired private IUserinfoService userinfoService;
 
