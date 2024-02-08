@@ -16,8 +16,10 @@ import redis.clients.jedis.ShardedJedisPool;
  * https://www.awebide.com/apis/aweb-redis-client/doc/cn/com/agree/aweb/redis/client/jedis/ShardedJedis.html
  */
 public class BaseRedisDao {
+
   /** 日志 */
   protected Logger logger = LogManager.getLogger(this.getClass());
+
   /** redis连接池 */
   protected ShardedJedisPool shardedJedisPool;
 
@@ -1066,9 +1068,10 @@ public class BaseRedisDao {
     return shardedJedisPool.getResource();
   }
 
-  /** =============== 当DAO层方法需要传递map参数时 E只是用来定位namespace的 =============== * */
   /**
-   * @设置 redis连接池
+   * 当DAO层方法需要传递map参数时 E只是用来定位namespace的
+   *
+   * @desc redis连接池
    */
   public void setShardedJedisPool(ShardedJedisPool shardedJedisPool) {
     this.shardedJedisPool = shardedJedisPool;

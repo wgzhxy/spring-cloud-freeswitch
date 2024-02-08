@@ -1,6 +1,7 @@
 /** */
 package com.striveh.callcenter.server.callcenter.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +22,7 @@ import com.striveh.callcenter.pojo.callcenter.VoicePojo;
 public class VoiceController extends BaseController<VoicePojo> {
 
   /** voice service */
-  @Autowired private IVoiceService voiceService;
+  @Resource private IVoiceService voiceService;
 
   /**
    * get

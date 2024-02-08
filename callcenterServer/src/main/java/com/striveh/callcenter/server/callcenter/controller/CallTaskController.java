@@ -47,6 +47,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/callTask")
 public class CallTaskController extends BaseController<CallTaskPojo> {
+
   /** callTask 呼叫任务表service */
   @Autowired private ICallProjectService callProjectService;
 
@@ -193,8 +194,8 @@ public class CallTaskController extends BaseController<CallTaskPojo> {
               "up");
       logger.info(
           "网关状态查询 {},结果{}", gatewayPojo.getGwName(), EslHelper.formatEslMessage(eslMessage));
-      String gwurl = eslMessage.getBodyLines().get(0);
-      if (!gwurl.contains(gatewayPojo.getGwCode())) {
+      String gwUrl = eslMessage.getBodyLines().get(0);
+      if (!gwUrl.contains(gatewayPojo.getGwCode())) {
         optResult = EResCodeServer.exptCallTaskStart.getOptResult(logger);
         optResult.setMsg(gatewayPojo.getGwName() + "未注册，请先解决或者更换线路");
         return new ResponseData<Object>(optResult);
@@ -207,8 +208,8 @@ public class CallTaskController extends BaseController<CallTaskPojo> {
               gatewayPojo.getUsername());
       logger.info(
           "网关状态查询 {},结果{}", gatewayPojo.getGwName(), EslHelper.formatEslMessage(eslMessage));
-      String gwurl = eslMessage.getBodyLines().get(0);
-      if (gwurl.contains("user_not_registered")) {
+      String gwUrl = eslMessage.getBodyLines().get(0);
+      if (gwUrl.contains("user_not_registered")) {
         optResult = EResCodeServer.exptCallTaskStart.getOptResult(logger);
         optResult.setMsg(gatewayPojo.getGwName() + "未注册，请先解决或者更换线路");
         return new ResponseData<Object>(optResult);

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/fs")
 public class FSManageController {
 
+  @Autowired private InboundClient inboundClient;
+
   @GetMapping("/demo")
   public String demo() {
     return "demo";
@@ -22,8 +24,6 @@ public class FSManageController {
   public void addServer1(String host, int port) {
     InboundClient.getInstance().option().addServerOption(new ServerOption(host, port));
   }
-
-  @Autowired private InboundClient inboundClient;
 
   @GetMapping("/addServer2")
   public void addServer2(String host, int port) {
