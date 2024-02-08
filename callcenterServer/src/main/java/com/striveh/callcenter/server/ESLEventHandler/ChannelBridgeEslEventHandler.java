@@ -12,13 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+
 @EslEventName(EventNames.CHANNEL_BRIDGE)
 @Component
 public class ChannelBridgeEslEventHandler implements EslEventHandler {
 
   protected Logger log = LogManager.getLogger(this.getClass());
 
-  @Autowired private SimpMessageSendingOperations msgOperations;
+  @Resource
+  private SimpMessageSendingOperations msgOperations;
 
   @Override
   public void handle(String addr, EslEvent event) {

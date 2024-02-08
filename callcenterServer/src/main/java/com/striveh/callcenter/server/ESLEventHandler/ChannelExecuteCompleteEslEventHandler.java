@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
 @EslEventName(EventNames.CHANNEL_EXECUTE_COMPLETE)
 @Component
 public class ChannelExecuteCompleteEslEventHandler implements EslEventHandler {
-    protected Logger log = LogManager.getLogger(this.getClass());
 
-    @Override
-    public void handle(String addr, EslEvent event) {
-        log.info("ChannelExecuteCompleteEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
-    }
+  protected Logger log = LogManager.getLogger(this.getClass());
+
+  @Override
+  public void handle(String addr, EslEvent event) {
+    log.info("ChannelExecuteCompleteEslEventHandler handle addr[{}] EslEvent[{}].", addr, event);
+  }
 }

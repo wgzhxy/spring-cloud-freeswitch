@@ -22,22 +22,24 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
 @EslEventName(EventNames.CHANNEL_DESTROY)
 @Component
 public class ChannelDestroyEslEventHandler implements EslEventHandler {
+
   protected Logger log = LogManager.getLogger(this.getClass());
 
-  @Autowired
+  @Resource
   @Qualifier("baseRedisDaoDef")
   private BaseRedisDao baseRedisDao;
 
-  @Autowired private IUserInfoServiceApi userInfoServiceApi;
-  @Autowired private SimpMessageSendingOperations msgOperations;
-  @Autowired private ICallProjectService callProjectService;
-  @Autowired @Lazy private ICallTaskService callTaskService;
+  @Resource private IUserInfoServiceApi userInfoServiceApi;
+  @Resource private SimpMessageSendingOperations msgOperations;
+  @Resource private ICallProjectService callProjectService;
+  @Resource @Lazy private ICallTaskService callTaskService;
 
   @Override
   public void handle(String addr, EslEvent event) {

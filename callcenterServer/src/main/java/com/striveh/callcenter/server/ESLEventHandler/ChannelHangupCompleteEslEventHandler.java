@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
@@ -35,22 +36,23 @@ import java.util.concurrent.atomic.AtomicReference;
 @EslEventName(EventNames.CHANNEL_HANGUP_COMPLETE)
 @Component
 public class ChannelHangupCompleteEslEventHandler implements EslEventHandler {
+
   protected Logger log = LogManager.getLogger(this.getClass());
 
-  @Autowired private ICallLogService callLogService;
+  @Resource private ICallLogService callLogService;
 
-  @Autowired
+  @Resource
   @Qualifier("baseRedisDaoDef")
   private BaseRedisDao baseRedisDao;
 
-  @Autowired
+  @Resource
   @Qualifier("baseRedisDaoDB0")
   private BaseRedisDao baseRedisDaoDB0;
 
-  @Autowired private StorageService storageService;
-  @Autowired private ICallProjectService callProjectService;
-  @Autowired @Lazy private ICallTaskService callTaskService;
-  @Autowired private InboundClient inboundClient;
+  @Resource private StorageService storageService;
+  @Resource private ICallProjectService callProjectService;
+  @Resource @Lazy private ICallTaskService callTaskService;
+  @Resource private InboundClient inboundClient;
 
   @Override
   public void handle(String addr, EslEvent event) {

@@ -1,6 +1,7 @@
 /** */
 package com.striveh.callcenter.server.callcenter.controller;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,13 +36,14 @@ import java.util.*;
 public class CallLogController extends BaseController<CallLogPojo> {
 
   /** callLog 呼叫日志表service */
-  @Autowired private ICallLogService callLogService;
+  @Resource
+  private ICallLogService callLogService;
 
   @Autowired
   @Qualifier("baseRedisDaoDBCache")
   private BaseRedisDao baseRedisDaoDBCache;
 
-  @Autowired private ICallTaskService callTaskService;
+  @Resource private ICallTaskService callTaskService;
   /**
    * get
    *

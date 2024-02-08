@@ -163,6 +163,7 @@ public class ChannelAnswerEslEventHandler implements EslEventHandler {
       msgOperations.convertAndSend(
           "/topic/transfer/" + event.getEventHeaders().get("Caller-Destination-Number"),
           JsonTool.getJsonString(body));
+
       Map<String, String> notify = new HashMap<>();
       notify.put("type", "message");
       notify.put("duration", "3000");
@@ -175,15 +176,13 @@ public class ChannelAnswerEslEventHandler implements EslEventHandler {
           this.userInfoServiceApi.getByUsername(
               event.getEventHeaders().get("Caller-Destination-Number"));
       userinfoPojo.setSessionStatus(10);
-      //            userinfoPojo.setWorkStatus(1);
+      // userinfoPojo.setWorkStatus(1);
       userinfoPojo.setLastSessionBeginTime(DateTool.getTimestamp());
-
       msgOperations.convertAndSend("/topic/status/" + userinfoPojo.getUsername(), userinfoPojo);
 
       userinfoPojo.setDestinationNumber(body.get("telNo"));
       userinfoPojo.setCallTaskCode(body.get("callTaskCode"));
       userinfoPojo.setDestinationUUID(body.get("callId"));
-
       userinfoPojo.setStatus(null);
       userinfoPojo.setWorkStatus(null);
       userinfoPojo.setCalluuid(event.getEventHeaders().get("Unique-ID"));
